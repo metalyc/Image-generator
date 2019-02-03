@@ -9,5 +9,10 @@
 <ul>
   <li>Shadows (depth)</li>
   <li>stencils (leaves, shells, etc)</li>
-  <li>Material (wallpaper)</li>
+  <li>Textures:</li>
+  <ul>
+    <li>Material</li>
+    <li>bubbles</li>
+    <li>rainbow</li>
+  </ul>
 </ul>
