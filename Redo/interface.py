@@ -1,4 +1,4 @@
-#interface
+#layout:
     #test pallets
         #list pallettes
     #make image
@@ -12,7 +12,13 @@
         #draw image
         #show image
         #options for saving and name
-import os
+
+"""
+Need a better way to read the styles and pallettes,
+generate selection lists, and interface with them.
+"""
+
+#import os #for cls
 import pallettes
 
 while True:
@@ -22,61 +28,99 @@ while True:
     print("2.\tgenereate image")
     print("0.\texit")
     testormake = input("Selection: ")
-    if testormake == '1':
-        print("Select a pallette:")
-        print("1.\tRed on white")
-        print("2.\tBlue on white")
-        print("3.\tGreen on white")
-        print("0.\tGo back")
-        pallettepreview = input("Selection: ")
-        if pellettepreview == '1':
-            print()
-            # FIXME: finish this shit
-        else:
-            pass
-    elif testormake == '2':
-        print()
-        # FIXME: shit
-    elif testermake == '0':
+    if testormake == '1':   #preview pallettes
+        while True:
+            print("Select a pallette:")
+            print("1.\tRed on white")
+            print("2.\tBlue on white")
+            print("3.\tGreen on white")
+            print("0.\tGo back")
+            pallettepreview = input("Selection: ")
+            if pallettepreview == '1': #red/white
+                print()
+                # FIXME:
+            elif pallettepreview == '2': #blue/white
+                print()
+                # FIXME:
+            elif pallettepreview == '3': #Green/white
+                print()
+                # FIXME:
+            elif pallettepreview == '0':
+                pallettepreview = ''
+                break
+            else:
+                print("Selection not recognized")
+    elif testormake == '2': #make image
+        while True:
+            print("Select a style:")
+            print("1.\twaves")
+            print("2.\tcircles")
+            print("0.\tgo back")
+            imagestyle = input("Selection: ")
+            if imagestyle == '1' or imagestyle =='2': #continue
+                while True:
+                    print("Select a pallette:")
+                    print("1.\tRed on white")
+                    print("2.\tBlue on white")
+                    print("3.\tGreen on white")
+                    print("0.\tGo back")
+                    imagepallette = input("Selection: ")
+                    if imagepallette == '1' or imagepallette == '2' or imagepallette == '3':
+                        while True: # FIXME: add pallette selection
+                            print("Define horizontal image size")
+                            imagex = int(input("Width: ")) # FIXME: need to check if numbers
+                            imagey = int(input("Height: "))
+                            print("\"" + imagex + "x" + imagey + "\"")
+                            sizeyn = input("Is this correct? (y/n)").upper()
+                            if sizeyn == "Y":
+                                from PIL import Image
+                                from PIL import ImageFilter
+                                import math
+                                size = (imagex, imagey)
+                                pallette = # FIXME: pallette selection
+                                img = Image.new( 'RGB', size, pallette)
+                                pixels = img.load()
+                                if imagestyle == '1': # FIXME: waves
+                                    import waves
+                                    print()
+                                elif imagestyle == '2': # FIXME: circles
+                                    import circles
+                                img = img.filter(ImageFilter.SMOOTH_MORE)
+                                print("Loading preview")
+                                img.show()
+                                while True:
+                                    print('Would you like to save the image? y/n')
+                                    savedecision = input().upper()
+                                    if savedecision == 'Y':
+                                        savename = input('Please give a name for the save: ')
+                                        img.save(savename + ".png", "PNG") #save image
+                                        print('saved as', savename + '.png')
+                                        break
+                                    elif savedecision == 'N':
+                                        break
+                                    else:
+                                        print("Selection not recognized")
+                            elif sizeyn == "N"
+                                sizeyn = ''
+                            else:
+                                print("Selection not recognized")
+                                sizeyn = ''
+                    elif imagepallette == '0':
+                        imagepallette = ''
+                        break
+                    else:
+                        print("Selection not recognized")
+                        imagepallette = ''
+            elif imagestyle == '0':
+                imagestyle = ''
+                break
+            else:
+                print("Selection not recognized")
+                imagestyle = ''
+    elif testormake == '0': #exit
+        Print("exiting")
         exit()
     else:
-        print("not recognized.")
-        pass
-
-#setup
-from PIL import Image
-from PIL import ImageFilter
-import math
-img = Image.new( 'RGB', set.size, set.pallet[0]) # FIXME:
-pixels = img.load()
-x = int(img.size[0]/2) # FIXME:
-y = int(img.size[1]/2) # FIXME:
-
-#drawing
-for i in range(img.size[0]):    # For every pixel:
-    for j in range(img.size[1]):
-        for p in range(num): #shadow business creates gradiant, very slow for some reason...
-            if j > (math.cos(i/200)*(y-400)) + y + p:
-                pixels[i,-j] = (set.pallet[0][0] + p, set.pallet[0][1] + p, set.pallet[0][2] + p)
-        if j < (math.cos(i/(y/2))*(y-y))+y: #cosine wave
-            pixels[i,-j-1] = set.pallet[1]
-
-#finishing
-img = img.filter(ImageFilter.SMOOTH_MORE) #filter
-
-print('Image finished!')
-img.show() #show image
-while True:
-    print('Would you like to save the image? y/n')
-    savedecision = input().upper()
-    if savedecision == 'Y':
-        savename = input('Please give a name for the save: ')
-        img.save(savename + ".png", "PNG") #save image
-        print('saved as', savename + '.png')
-        break
-    elif savedecision == 'N':
-        break
-    else:
-        print("input not recognized")
-
-print('exiting')
+        testormake = ''
+        print("Selection not recognized")
+exit()
