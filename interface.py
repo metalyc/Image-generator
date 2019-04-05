@@ -2,7 +2,7 @@ def set_palette(x):
     import palettes
     global colors
     colors = palettes.p_list[x]
-    print(x, colors)
+    print('palette:', x, colors)
 
 def set_style(x):
     global style
@@ -24,7 +24,7 @@ def set_style(x):
     elif x == 'randomWaves':
         from styles import randomWaves
         style = randomWaves.style
-    print(x)
+    print('style:', x)
 
 def set_size(x):
     global size
@@ -32,9 +32,10 @@ def set_size(x):
     size.append(x['width'])
     size.append(x['height'])
     size = tuple(size)
-    print(size)
+    print('resolution:', size)
 
 def draw_image():
+    print('Drawing image...')
     from PIL import Image
     from PIL import ImageFilter
     global img
@@ -50,6 +51,7 @@ def show_image():
 def save_image(config):
     savename = config['palette'] + ' ' + config['style'] + ' ' + str(config['size']['width']) + 'x' + str(config['size']['height']) + '.png'
     img.save('generated images/' + savename, 'PNG')
+    print('Image saved as', savename)
 
 def generate(config):
     set_palette(config['palette'])
