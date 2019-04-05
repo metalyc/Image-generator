@@ -24,6 +24,9 @@ def set_style(x):
     elif x == 'randomWaves':
         from styles import randomWaves
         style = randomWaves.style
+    elif x == 'puddle':
+        from styles import puddle
+        style = puddle.style
     print('style:', x)
 
 def set_size(x):
