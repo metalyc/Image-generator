@@ -10,7 +10,7 @@ def style(size, colors, pixels):
                              'r':random.uniform(.5,2)
                              }# x coord, y coord, radius
         circles.append(circle_properties)
-    print(circles[0]['x'])
+
     x = linspace(-7,7,size[0])
     y = linspace(-4,4,size[1])
     values = []

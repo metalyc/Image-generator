@@ -14,6 +14,18 @@ def set_style(x):
         from styles import circles
         style = circles.style
         print('cirlces')
+    elif x == 'heart':
+        from styles import heart
+        style = heart.style
+        print('heart')
+    elif x == 'wonkylines':
+        from styles import wonkylines
+        style = wonkylines.style
+        print('wonkylines')
+    elif x == 'triangles':
+        from styles import triangles
+        style = triangles.style
+        print('triangles')
 
 def set_size(x):
     global size
