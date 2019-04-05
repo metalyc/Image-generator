@@ -53,7 +53,6 @@ def save_image(config):
     img.save('generated images/' + savename, 'PNG')
 
 def generate(config):
-    print(config['palette'])
     set_palette(config['palette'])
     set_style(config['style'])
     set_size(config['size'])
