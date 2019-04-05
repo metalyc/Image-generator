@@ -1,39 +1,48 @@
-#layout:
-    #test pallets
-        #list pallettes
-    #make image
-        #select style
-            #list styles
-        #select pallette
-            #list pallettes
-        #set image size
-        #confirm settings
-            #demo
-        #draw image
-        #show image
-        #options for saving and name
-
-"""
-Need a better way to read the styles and pallettes,
-generate selection lists, and interface with them.
-"""
-def set_pallette():
-    pass
+def set_palette():
+    import palettes
+    global colors
+    colors = palettes.list[config['palette']]
+    print(colors)
 
 def set_style():
-    pass
+    global style
+    if config['style'] == 'waves':
+        from styles import waves
+        style = waves.style
+        print('waves')
+    elif config['style'] == 'circles':
+        from styles import circles
+        style = circles.style
+        print('cirlces')
 
 def set_size():
-    pass
+    global size
+    size = []
+    size.append(config['size']['width'])
+    size.append(config['size']['height'])
+    size = tuple(size)
+    print(size)
 
 def draw_image():
-    pass
+    from PIL import Image
+    from PIL import ImageFilter
+    global img
+    global pixels
+    img = Image.new('RGB', size, colors[0])
+    pixels = img.load()
+    pixels = style(size, colors, pixels)
+    img = img.filter(ImageFilter.SMOOTH_MORE)
 
 def show_image():
-    pass
+    img.show()
 
 def save_image():
-    pass
+    savename = config['palette'] + ' ' + config['style'] + ' ' + config['size'] + '.png'
+    img.save(savename, 'PNG')
 
-#import os #for cls
-import pallettes
+config = {'style': 'waves', 'palette': 'Red on white', 'size' : {'height' : 1080, 'width' : 1920}, 'lastmenu': 'palettes'}
+set_palette()
+set_style()
+set_size()
+draw_image()
+show_image()
