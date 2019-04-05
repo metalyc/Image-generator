@@ -1,3 +1,6 @@
+DEFAULT_WIDTH = 1920
+DEFAULT_HEIGHT = 1080
+
 def info():
 	txt = "Image-generator is a tool for generator wallpapers with various designs."
 	return txt
@@ -5,21 +8,23 @@ def info():
 #styles
 styles = ["waves", "circles"]
 palettes = ["Red on white", "Blue on white", "Green on white"]
+dimensions = ["width", "height"]
 
 #CLI options menus
-def main_menu_options(style_picked = False, palette_picked = False):
-	txt = ["You may customize the options shown here (defaults are random). Make a selection:"]
+def main_menu_options(style_picked, palette_picked, size_picked):
+	txt = ["You may customize the options shown here (defaults will be used otherwise). Make a selection:"]
 	
-	if style_picked:
+	if style_picked != "":
 		txt += ["select style (" + style_picked + ")"]
 	else:
 		txt += ["select style"]
 
-	if palette_picked:
+	if palette_picked != "":
 		txt += ["select palette (" + palette_picked + ")"]
 	else:
 		txt += ["select palette"]
 
+	txt += ["image size (" + str(size_picked["width"]) + "x" + str(size_picked["height"]) + ")"]
 	txt += ["genereate image"]
 	txt += ["exit"]
 
@@ -27,19 +32,29 @@ def main_menu_options(style_picked = False, palette_picked = False):
 
 def palettes_options():
 	txt = ["Select a palette:"]
-	txt += [palettes[0]]
-	txt += [palettes[1]]
-	txt += [palettes[2]]
-	txt += ["Go back"]
+	for p in range(len(palettes)):
+		txt += [palettes[p]]
+
+	txt += ["go back"]
 	 
 	return options_generator(txt)
 
 def styles_options():
 	txt = ["Select a style:"]
-	txt += [styles[0]]
-	txt += [styles[1]]
+	for s in range(len(styles)):
+		txt += [styles[s]]
+
 	txt += ["go back"]
 	 
+	return options_generator(txt)
+
+def sizes_options():
+	txt = ["Change width or height:"]
+	for d in range(len(dimensions)):
+		txt += [dimensions[d]]
+
+	txt += ["go back"]
+
 	return options_generator(txt)
 
 #other functions
@@ -58,58 +73,87 @@ def options_generator(txt):
 	return txt
 
 def options(num):
-	return str([i for i in range(1, num)] + [0])
+	return [str(i) for i in range(1, num)] + ['0']
 
-def get_user_input(prompt, options):
+def get_user_input(prompt, options, invalid = None):
 	prompt = ''.join(prompt)
 	while True:
 		i = input(prompt + "=>")
-		if i in options:
+		if i != "" and i in options:
 			return i
+		else:
+			if invalid == None:
+				invalid = 'please enter a valid input'
+
+			print(invalid)
 
 #iscreens
 def iscreen_styles(config):
-	user_input = int( get_user_input(styles_options(), options(STYLE_OPTIONS)) )
-	config["lastmenu"] = "styles"
+	prompt = styles_options()
+	valid_options = options(len(prompt) - 1)
+	user_input = int( get_user_input(prompt, valid_options))
 
-	if user_input == 1:
-		config["style"] = styles[user_input - 1]
-
-	if user_input == 2:
-		config["style"] = styles[user_input - 1]
+	for vo in valid_options:
+		if user_input == int(vo):
+			config["style"] = styles[user_input - 1]
+			break
 
 	print("----- style selected:", config["style"], "-----")
 	iscreen_main_menu(config)
 
 def iscreen_palettes(config):
-	user_input = int( get_user_input(palettes_options(), options(PALETTES_OPTIONS)) )
-	config["lastmenu"] = "palettes"
+	prompt = palettes_options()
+	valid_options = options(len(prompt) - 1)
+	user_input = int( get_user_input(prompt, valid_options))
 
-	if user_input == 1:
-		config["palette"] = palettes[user_input - 1]
-
-	if user_input == 2:
-		config["palette"] = palettes[user_input - 1]
-
-	if user_input == 3:
-		config["palette"] = palettes[user_input - 1]
+	for vo in valid_options:
+		if user_input == int(vo):
+			config["palette"] = palettes[user_input - 1]
+			break
 
 	print("----- palette selected:", config["palette"], "-----")
 	iscreen_main_menu(config)
 
+def iscreen_sizes(config):
+	prompt = sizes_options()
+	user_input = int( get_user_input(prompt, options(len(prompt) - 1)) )
+
+	if user_input == 1:
+		config["size"]["width"] = get_user_input("Enter cutsom width:", options(2048))
+		print("----- custom size selected: (", str(config["size"]["width"]) + "x" + str(config["size"]["height"]) + ")", "-----")
+		iscreen_sizes(config)
+
+	if user_input == 2:
+		config["size"]["height"] = get_user_input("Enter cutsom height:", options(2048))
+		print("----- custom size selected: (", str(config["size"]["width"]) + "x" + str(config["size"]["height"]) + ")", "-----")
+		iscreen_sizes(config)
+
+	iscreen_main_menu(config)
+
 def iscreen_main_menu(config = None):
+	user_input = None
 	if config == None:
-		user_input = int( get_user_input(main_menu_options(), options(MAIN_MENU_OPTIONS)) )
-		config = { "style": "", "palette": "", "lastmenu": "main_menu" }
+		config = {
+			"style": "",
+			"palette": "",
+				"size": {
+					"width": DEFAULT_WIDTH,
+					"height": DEFAULT_HEIGHT
+				}
+			}
 	else:
-		style = palette = None
+		style = palette = size = None
 		if config["style"] != "":
 			style = config["style"]
 
 		if config["palette"] != "":
 			palette = config["palette"]
 
-		user_input = int( get_user_input(main_menu_options(style, palette), options(MAIN_MENU_OPTIONS)) )		
+		if config["size"]["width"] != DEFAULT_WIDTH and config["size"]["height"] != DEFAULT_HEIGHT:
+			size = config["size"]
+
+	prompt = main_menu_options(config["style"], config["palette"], config["size"])
+	user_input = int( get_user_input(prompt, options(len(prompt) - 1)) )		
 
 	if user_input == 1:
 		iscreen_styles(config)
@@ -118,16 +162,16 @@ def iscreen_main_menu(config = None):
 		iscreen_palettes(config)
 
 	if user_input == 3:
-		from interface import genereate
-		generate(config)
+		iscreen_sizes(config)
+
+	if user_input == 4:
+		#from interface import genereate
+		#generate(config)
+		print("yay")
+		exit()
 
 	if user_input == 0:
 		exit()
-
-#options constants
-MAIN_MENU_OPTIONS = len(main_menu_options()) - 1
-STYLE_OPTIONS = len(styles_options()) - 1
-PALETTES_OPTIONS = len(palettes_options()) - 1
 
 print(info())
 iscreen_main_menu()
