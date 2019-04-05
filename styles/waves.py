@@ -10,12 +10,15 @@ def style(size, colors, pixels):
     x = math.floor(size[0]/2)
     y = math.floor(size[1]/2)
     shadowlen = 25 # FIXME: might need to scale
+    y_tl = y*0.75
+    y_tm = y*0.375
     for i in range(size[0]):
+        wave_algo = (math.cos(i/(y_tm))*(y-y_tl)) + y
         for j in range(size[1]):
             for s in range(shadowlen):
-                if (math.cos(i/(y*0.375))*(y-y*0.75)) + y + s + 1 > j > (math.cos(i/(y*0.375))*(y-y*0.75)) + y + s:
-                    q = s*2 + math.floor(y*0.375)
-                    pixels[i,-j-1] = (abs(colors[0][0] - 255 + q), abs(colors[0][1] - 255 + q), abs(colors[0][2] - 255 + q))
-            if j < (math.cos(i/(y*0.375))*(y-y*0.75))+y:
+                if wave_algo + s + 1 > j > wave_algo + s:
+                    q = math.floor(s*(shadowlen/10) + y_tm)
+                    pixels[i,-j-1] = (abs(pixels[i,-j-1][0] - 255 + q), abs(pixels[i,-j-1][1] - 255 + q), abs(pixels[i,-j-1][2] - 255 + q))
+            if j < wave_algo:
                 pixels[i,-j-1] = colors[1]
     return pixels
