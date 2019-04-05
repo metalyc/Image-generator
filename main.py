@@ -118,7 +118,8 @@ def iscreen_main_menu(config = None):
 		iscreen_palettes(config)
 
 	if user_input == 3:
-		print(config)
+		from interface import genereate
+		generate(config)
 
 	if user_input == 0:
 		exit()

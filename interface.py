@@ -17,7 +17,7 @@
 Need a better way to read the styles and pallettes,
 generate selection lists, and interface with them.
 """
-def set_pallette():
+def set_palette():
     pass
 
 def set_style():
@@ -35,5 +35,7 @@ def show_image():
 def save_image():
     pass
 
-#import os #for cls
-import pallettes
+def generate(config):
+    set_style(config["style"])
+    set_pallette(config["palette"])
+    set_size(config["size"])
