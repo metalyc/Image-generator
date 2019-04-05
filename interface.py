@@ -36,9 +36,9 @@ def draw_image():
 def show_image():
     img.show()
 
-def save_image():
-    savename = config['palette'] + ' ' + config['style'] + ' ' + config['size'] + '.png'
-    img.save(savename, 'PNG')
+def save_image(config):
+    savename = config['palette'] + ' ' + config['style'] + ' ' + str(config['size']['width']) + 'x' + str(config['size']['height']) + '.png'
+    img.save('generated images/' + savename, 'PNG')
 
 def generate(config):
     set_palette(config['palette'])
@@ -46,3 +46,4 @@ def generate(config):
     set_size(config['size'])
     draw_image()
     show_image()
+    save_image(config)

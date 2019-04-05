@@ -15,7 +15,7 @@ def style(size, colors, pixels):
             for s in range(shadowlen):
                 if (math.cos(i/(y*0.375))*(y-y*0.75)) + y + s + 1 > j > (math.cos(i/(y*0.375))*(y-y*0.75)) + y + s:
                     q = s*2 + math.floor(y*0.375)
-                    pixels[i,-j-1] = (abs(colors[0][0] - 255) + q, abs(colors[0][1] - 255) + q, abs(colors[0][2] - 255) + q)
+                    pixels[i,-j-1] = (abs(colors[0][0] - 255 + q), abs(colors[0][1] - 255 + q), abs(colors[0][2] - 255 + q))
             if j < (math.cos(i/(y*0.375))*(y-y*0.75))+y:
                 pixels[i,-j-1] = colors[1]
     return pixels
