@@ -51,7 +51,7 @@ def show_image():
 def save_image(config):
     savename = config['palette'] + ' ' + config['style'] + ' ' + str(config['size']['width']) + 'x' + str(config['size']['height']) + '.png'
     img.save('generated images/' + savename, 'PNG')
-    print('Image saved as', savename)
+    print('Image saved in \"images\" folder, as \"' + savename + '\"')
 
 def generate(config):
     set_palette(config['palette'])
