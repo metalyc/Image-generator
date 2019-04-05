@@ -165,6 +165,12 @@ def iscreen_main_menu(config = None):
 		iscreen_sizes(config)
 
 	if user_input == 4:
+		if config["style"] != "":
+			config["style"] = styles[0]
+
+		if config["palette"] != "":
+			config["palette"] = palettes[0]
+
 		from interface import generate
 		generate(config)
 		print("yay")
