@@ -192,10 +192,11 @@ def iscreen_main_menu(config = None):
 
 		from interface import generate
 		generate(config)
-		print("yay")
+		print("Done.")
 		exit()
 
 	if user_input == 0:
+		print("Goodbye.")
 		exit()
 
 print(info())
