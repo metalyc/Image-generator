@@ -24,7 +24,7 @@ def style(size, colors, pixels):
     for triangle in triangles:
         for i in range(len(x)):
             for j in range(len(y)):
-                if abs((triangle['b']['y']-triangle['c']['y'])/(triangle['b']['x']-triangle['c']['x'])*(x[i]-triangle['c']['x'])-(y[j]-triangle['c']['y']))<0.01:
+                if abs((triangle['b']['y']-triangle['c']['y'])/(triangle['b']['x']-triangle['c']['x'])*(x[i]-triangle['c']['x'])-(y[j]-triangle['c']['y']))<0.05:
                     values.append([i,j])
 
     for i in range(len(values)):

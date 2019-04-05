@@ -27,6 +27,9 @@ def set_style(x):
     elif x == 'puddle':
         from styles import puddle
         style = puddle.style
+    elif x == 'randomParticle':
+        from styles import randomParticle
+        style = randomParticle.style
     print('style:', x)
 
 def set_size(x):
