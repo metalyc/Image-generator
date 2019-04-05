@@ -9,23 +9,22 @@ def set_style(x):
     if x == 'waves':
         from styles import waves
         style = waves.style
-        print('waves')
     elif x == 'circles':
         from styles import circles
         style = circles.style
-        print('cirlces')
     elif x == 'heart':
         from styles import heart
         style = heart.style
-        print('heart')
     elif x == 'wonkylines':
         from styles import wonkylines
         style = wonkylines.style
-        print('wonkylines')
     elif x == 'triangles':
         from styles import triangles
         style = triangles.style
-        print('triangles')
+    elif x == 'randomWaves':
+        from styles import randomWaves
+        style = randomWaves.style
+    print(x)
 
 def set_size(x):
     global size
