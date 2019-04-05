@@ -7,7 +7,7 @@ def info():
 
 #styles
 styles = ["waves", "circles"]
-palettes = ["Red on white", "Blue on white", "Green on white"]
+palettes = ["Red on white", "Blue on white", "Green on white", "Violet on white", "Orange on white", "Red on dark", "Blue on dark", "Green on dark", "Violet on dark", "Orange on dark"]
 dimensions = ["width", "height"]
 
 #CLI options menus
