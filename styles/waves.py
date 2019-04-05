@@ -1,15 +1,8 @@
-#waves plotting here
-#should only plot the wave and shadow, not the background
-#options:
-    #height (from valley to peak)
-    #bite (space between peaks)
-    #padding from top and bottom
-    #shadow intensity
 def style(size, colors, pixels):
     import math
     x = math.floor(size[0]/2)
     y = math.floor(size[1]/2)
-    shadowlen = 25 # FIXME: might need to scale
+    shadowlen = 25
     y_tl = y*0.75
     y_tm = y*0.375
     for i in range(size[0]):
