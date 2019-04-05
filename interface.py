@@ -18,12 +18,15 @@ def set_style(x):
     elif x == 'wonkylines':
         from styles import wonkylines
         style = wonkylines.style
-    elif x == 'triangles':
-        from styles import triangles
-        style = triangles.style
-    elif x == 'randomWaves':
-        from styles import randomWaves
-        style = randomWaves.style
+    elif x == 'lines':
+        from styles import lines
+        style = lines.style
+    elif x == 'wavesRandom':
+        from styles import wavesRandom
+        style = wavesRandom.style
+    elif x == 'puddle':
+        from styles import puddle
+        style = puddle.style
     print('style:', x)
 
 def set_size(x):
