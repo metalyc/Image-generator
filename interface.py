@@ -2,7 +2,7 @@ def set_palette(x):
     import palettes
     global colors
     colors = palettes.list[x]
-    print(colors)
+    print(x, colors)
 
 def set_style(x):
     global style
@@ -41,6 +41,7 @@ def save_image(config):
     img.save('generated images/' + savename, 'PNG')
 
 def generate(config):
+    print(config['palette'])
     set_palette(config['palette'])
     set_style(config['style'])
     set_size(config['size'])
