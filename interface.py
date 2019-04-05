@@ -1,25 +1,25 @@
-def set_palette():
+def set_palette(x):
     import palettes
     global colors
-    colors = palettes.list[config['palette']]
+    colors = palettes.list[x]
     print(colors)
 
-def set_style():
+def set_style(x):
     global style
-    if config['style'] == 'waves':
+    if x == 'waves':
         from styles import waves
         style = waves.style
         print('waves')
-    elif config['style'] == 'circles':
+    elif x == 'circles':
         from styles import circles
         style = circles.style
         print('cirlces')
 
-def set_size():
+def set_size(x):
     global size
     size = []
-    size.append(config['size']['width'])
-    size.append(config['size']['height'])
+    size.append(x['width'])
+    size.append(x['height'])
     size = tuple(size)
     print(size)
 
@@ -40,9 +40,9 @@ def save_image():
     savename = config['palette'] + ' ' + config['style'] + ' ' + config['size'] + '.png'
     img.save(savename, 'PNG')
 
-config = {'style': 'waves', 'palette': 'Red on white', 'size' : {'height' : 1080, 'width' : 1920}, 'lastmenu': 'palettes'}
-set_palette()
-set_style()
-set_size()
-draw_image()
-show_image()
+def generate(config):
+    set_palette(config['palette'])
+    set_style(config['style'])
+    set_size(config['size'])
+    draw_image()
+    show_image()

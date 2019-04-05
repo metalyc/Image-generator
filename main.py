@@ -13,7 +13,7 @@ dimensions = ["width", "height"]
 #CLI options menus
 def main_menu_options(style_picked, palette_picked, size_picked):
 	txt = ["You may customize the options shown here (defaults will be used otherwise). Make a selection:"]
-	
+
 	if style_picked != "":
 		txt += ["select style (" + style_picked + ")"]
 	else:
@@ -36,7 +36,7 @@ def palettes_options():
 		txt += [palettes[p]]
 
 	txt += ["go back"]
-	 
+
 	return options_generator(txt)
 
 def styles_options():
@@ -45,7 +45,7 @@ def styles_options():
 		txt += [styles[s]]
 
 	txt += ["go back"]
-	 
+
 	return options_generator(txt)
 
 def sizes_options():
@@ -153,7 +153,7 @@ def iscreen_main_menu(config = None):
 			size = config["size"]
 
 	prompt = main_menu_options(config["style"], config["palette"], config["size"])
-	user_input = int( get_user_input(prompt, options(len(prompt) - 1)) )		
+	user_input = int( get_user_input(prompt, options(len(prompt) - 1)) )
 
 	if user_input == 1:
 		iscreen_styles(config)
@@ -165,8 +165,8 @@ def iscreen_main_menu(config = None):
 		iscreen_sizes(config)
 
 	if user_input == 4:
-		#from interface import genereate
-		#generate(config)
+		from interface import generate
+		generate(config)
 		print("yay")
 		exit()
 
