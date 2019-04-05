@@ -21,9 +21,9 @@ def set_style(x):
     elif x == 'lines':
         from styles import lines
         style = lines.style
-    elif x == 'randomWaves':
-        from styles import randomWaves
-        style = randomWaves.style
+    elif x == 'wavesRandom':
+        from styles import wavesRandom
+        style = wavesRandom.style
     elif x == 'puddle':
         from styles import puddle
         style = puddle.style
