@@ -5,10 +5,23 @@ def info():
 	txt = "Image-generator is a tool for generator wallpapers with various designs."
 	return txt
 
-#styles
-styles = ["waves", "circles"]
-palettes = ["Red on white", "Blue on white", "Green on white", "Violet on white", "Orange on white", "Red on dark", "Blue on dark", "Green on dark", "Violet on dark", "Orange on dark"]
+import os
+from palettes import p_list
+
+styles = []
+palettes = []
 dimensions = ["width", "height"]
+
+for i in p_list:
+	palettes.append(i)
+
+for root, dirs, files in os.walk("./styles/"):
+	if "__pycache__" in dirs:
+		dirs.remove("__pycache__")
+
+	for f in files:
+		if f.find('.py') > -1:
+			styles.append(f[:-3])
 
 #CLI options menus
 def main_menu_options(style_picked, palette_picked, size_picked):
@@ -79,9 +92,15 @@ def get_user_input(prompt, options, invalid = None):
 	prompt = ''.join(prompt)
 	while True:
 		i = input(prompt + "=>")
-		if i != "" and i in options:
-			return i
-		else:
+		try:
+			if i != "" and i in options:
+				return i
+			else:
+				if invalid == None:
+					invalid = 'please enter a valid input'
+
+				print(invalid)
+		except ValueError:
 			if invalid == None:
 				invalid = 'please enter a valid input'
 

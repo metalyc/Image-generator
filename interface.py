@@ -1,7 +1,7 @@
 def set_palette(x):
     import palettes
     global colors
-    colors = palettes.list[x]
+    colors = palettes.p_list[x]
     print(x, colors)
 
 def set_style(x):
