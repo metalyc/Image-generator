@@ -1,26 +1,3 @@
-#layout:
-    #test pallets
-        #list pallettes
-    #make image
-        #select style
-            #list styles
-        #select pallette
-            #list pallettes
-        #set image size
-        #confirm settings
-            #demo
-        #draw image
-        #show image
-        #options for saving and name
-
-"""
-Need a better way to read the styles and pallettes,
-generate selection lists, and interface with them.
-"""
-
-#import os #for cls
-import pallettes
-
 while True:
     #os.system('cls' if os.name == 'nt' else 'clear') #taken from https://stackoverflow.com/questions/2084508/clear-terminal-in-python#2084628
     print("Make a selection:")
