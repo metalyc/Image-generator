@@ -138,12 +138,12 @@ def iscreen_sizes(config):
 	user_input = int( get_user_input(prompt, options(len(prompt) - 1)) )
 
 	if user_input == 1:
-		config["size"]["width"] = get_user_input("Enter cutsom width:", options(2048))
+		config["size"]["width"] = int( get_user_input("Enter cutsom width:", options(2048)))
 		print("----- custom size selected: (", str(config["size"]["width"]) + "x" + str(config["size"]["height"]) + ")", "-----")
 		iscreen_sizes(config)
 
 	if user_input == 2:
-		config["size"]["height"] = get_user_input("Enter cutsom height:", options(2048))
+		config["size"]["height"] = int( get_user_input("Enter cutsom height:", options(2048)))
 		print("----- custom size selected: (", str(config["size"]["width"]) + "x" + str(config["size"]["height"]) + ")", "-----")
 		iscreen_sizes(config)
 
